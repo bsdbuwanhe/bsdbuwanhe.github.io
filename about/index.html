@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Midnight Jazz Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* --- 继承首页的核心变量 --- */
+        :root {
+            --bg-color: #0f0f10;
+            --card-bg: #1a1a1c;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent-gold: #d4af37;
+            --accent-red: #722f37;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--accent-gold);
+        }
+
+        /* --- 导航栏 (保持一致) --- */
+        header {
+            background-color: rgba(15, 15, 16, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: bold; color: var(--accent-gold); letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); }
+
+        /* --- Page Header (较小的 Hero) --- */
+        .page-header {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(15,15,16,0.3), var(--bg-color)),
+                        url('https://images.unsplash.com/photo-1514525253440-b393452e8d26?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            color: #ccc;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* --- Story Section (图文混排) --- */
+        .story-section { padding: 50px 0; }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border: 1px solid var(--accent-gold);
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+
+        .story-img:hover { filter: grayscale(0%); }
+
+        .story-text h2 { font-size: 2.5rem; margin-bottom: 30px; }
+        .story-text p { margin-bottom: 20px; color: #ccc; font-size: 1.05rem; }
+        
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-top: 30px;
+            color: var(--accent-gold);
+            transform: rotate(-5deg);
+            display: inline-block;
+        }
+
+        /* --- Quote Banner --- */
+        .quote-banner {
+            background-color: var(--card-bg);
+            padding: 80px 0;
+            text-align: center;
+            margin: 80px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        
+        .quote-banner blockquote {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-style: italic;
+            color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quote-author {
+            display: block;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--accent-gold);
+            font-family: var(--font-body);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- Musicians / Team Grid --- */
+        .team-section { padding-bottom: 100px; }
+        .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .artist-card {
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            padding: 40px 30px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .artist-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .artist-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #000;
+            margin: 0 auto 20px;
+            border: 2px solid var(--accent-gold);
+            overflow: hidden;
+        }
+
+        .artist-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(50%); }
+
+        .artist-name { font-size: 1.5rem; margin-bottom: 5px; color: #fff; }
+        .artist-role { color: var(--accent-gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .artist-desc { font-size: 0.9rem; color: #888; }
+
+        /* --- Footer (保持一致) --- */
+        footer {
+            background-color: #000;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        .copyright { color: #555; font-size: 0.8rem; }
+
+        /* --- 移动端 --- */
+        @media (max-width: 768px) {
+            .story-grid { grid-template-columns: 1fr; }
+            .header-content h1 { font-size: 2.5rem; }
+            .story-img { height: 300px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">BLUE NOTE.</div>
+                <div class="nav-links">
+                    <a href="jazz.html">首页</a> 
+                    <a href="#" class="active">乐队</a>
+                    <a href="#">演出表</a>
+                    <a href="#">预订</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Our Story</h1>
+            <p>Keeping the spirit of 1959 alive.</p>
+        </div>
+    </section>
+
+    <section class="container story-section">
+        <div class="story-grid">
+            <div class="story-text">
+                <h2>Behind the Velvet Curtain</h2>
+                <p>我们成立于一个数字化的时代，却固执地想要留住模拟信号的温暖。Blue Note Tribute 不仅仅是一个俱乐部，它是这座城市在深夜里唯一不眠的灵魂避难所。</p>
+                <p>这里的每一块砖都吸收了数十年的萨克斯风回响，每一杯威士忌都伴随着钢琴的切分音。我们不仅演奏爵士乐，我们崇敬那些伟大的即兴瞬间——那些无法复制、转瞬即逝的艺术。</p>
+                <p>如果你在寻找一个可以安静聆听、或者随着 Swing 节奏轻轻摇摆的地方，欢迎回家。</p>
+                <div class="signature">The Founder</div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Vintage Microphone" class="story-img">
+        </div>
+    </section>
+
+    <section class="quote-banner">
+        <div class="container">
+            <blockquote>
+                "Jazz is not just music, it is the only way to speak without words."
+            </blockquote>
+            <span class="quote-author">— 灵感源自 Note</span>
+        </div>
+    </section>
+
+    <section class="container team-section">
+        <h2 class="section-title">Resident Artists</h2>
+        <div class="team-grid">
+            <div class="artist-card">
+                <div class="artist-img">
+                    <img src="https://images.unsplash.com/photo-1549834125-82d3c48159a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pianist">
+                </div>
+                <h3 class="artist-name">Marcus Cole</h3>
+                <div class="artist-role">Piano / Composer</div>
+                <p class="artist-desc">以其细腻的和声编排著称，深受 Bill Evans 风格影响的钢琴诗人。</p>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-img">
+                    <img src="https://images.unsplash.com/photo-1525926477800-7a3be5802318?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Saxophonist">
+                </div>
+                <h3 class="artist-name">Sarah Vaughn</h3>
+                <div class="artist-role">Alto Saxophone</div>
+                <p class="artist-desc">她的萨克斯风如同深夜的低语，能够在波普与酷派爵士间自由切换。</p>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-img">
+                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Drummer">
+                </div>
+                <h3 class="artist-name">Leo "Sticks"</h3>
+                <div class="artist-role">Drums / Percussion</div>
+                <p class="artist-desc">节奏掌控者，擅长在复杂的复节奏中寻找完美的摇摆律动。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2024 Blue Note Jazz Club Tribute. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
